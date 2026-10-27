@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Partner Dashboard — Locafy</title>
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Leaflet Map CSS for Pin Picker -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<link rel="stylesheet" href="css/main.css">
+<style>
+.dashboard-header {
+  background: var(--charcoal);
+  color: #FFFFFF;
+  padding: 40px 0 32px;
+  position: relative;
+  overflow: hidden;
+}
+.dashboard-header .eyebrow {
+  color: #6EE7B7;
+}
+.dashboard-header .eyebrow::before {
+  background: #6EE7B7;
+}
+.dashboard-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.dashboard-title-row h1 {
+  color: #FFFFFF;
+  font-size: 30px;
+  margin-top: 6px;
+}
+
+/* Stats Row */
+.dash-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  margin: -24px 0 36px;
+  position: relative;
+  z-index: 10;
+}
+.dash-stat-card {
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 18px 16px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+.dash-stat-card .ds-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--blue-pale);
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.dash-stat-card b {
+  font-family: var(--font-display);
+  font-size: 26px;
+  color: var(--ink);
+  line-height: 1;
+}
+.dash-stat-card span {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+/* Main Dashboard 2-Col Layout */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 32px;
+  padding-bottom: 70px;
+}
+.dash-box {
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 24px;
+}
+.dash-box-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.dash-box-head h2 {
+  font-size: 19px;
+}
+
+/* Range Switcher Tabs */
+.range-tabs {
+  display: flex;
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 3px;
+  gap: 2px;
+}
+.range-tab-btn {
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.range-tab-btn.active {
+  background: #FFFFFF;
+  color: var(--ink);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+/* Listings Items */
+.listing-item-card {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  border: 1.5px solid var(--line-soft);
+  border-radius: 16px;
+  margin-bottom: 12px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.listing-item-card:hover {
+  border-color: var(--blue);
+  box-shadow: var(--shadow-sm);
+}
+.listing-item-card.selected-biz {
+  border-color: var(--blue);
+  background: var(--blue-pale);
+}
+.listing-thumb {
+  width: 90px;
+  height: 90px;
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.listing-details {
+  flex: 1;
+  min-width: 0;
+}
+.listing-actions-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  justify-content: center;
+}
+
+/* Inbox Messages */
+.inbox-msg-item {
+  padding: 14px 16px;
+  border: 1px solid var(--line-soft);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  background: #FFFFFF;
+}
+.inbox-msg-item.unread {
+  border-left: 3.5px solid var(--blue);
+  background: rgba(37, 99, 235, 0.02);
+}
+
+@media(max-width: 1024px) {
+  .dash-stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media(max-width: 600px) {
+  .dash-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .listing-item-card {
+    flex-direction: column;
+  }
+  .listing-thumb {
+    width: 100%;
+    height: 140px;
+  }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="siteNav">
+  <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="Locafy"></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="search.html">Search Listings</a>
+    <a href="dashboard.html" class="active">Owner Dashboard</a>
+    <a href="favourites.html">Saved</a>
+  </div>
+  <div class="nav-actions"></div>
+</nav>
+
+<!-- DASHBOARD HEADER -->
+<header class="dashboard-header">
+  <div class="wrap">
+    <div class="dashboard-title-row">
+      <div>
+        <div class="eyebrow">BUSINESS OWNER CONSOLE</div>
+        <h1>Performance &amp; Leads Center</h1>
+      </div>
+      <button class="btn btn-primary btn-lg" onclick="openAddListingModal()" style="background:var(--gradient);">+ Add New Listing</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" style="margin-top:20px;">
+  <!-- STATS TILES -->
+  <div class="dash-stats-grid">
+    <div class="dash-stat-card">
+      <div class="ds-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+      <b id="statViews">0</b>
+      <span>Profile Views</span>
+    </div>
+    <div class="dash-stat-card">
+      <div class="ds-icon" style="background:var(--green-pale);color:var(--green);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+      <b id="statCalls">0</b>
+      <span>Phone Calls</span>
+    </div>
+    <div class="dash-stat-card">
+      <div class="ds-icon" style="background:#ECFDF5;color:#059669;"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/></svg></div>
+      <b id="statWhatsApp">0</b>
+      <span>WhatsApp Inquiries</span>
+    </div>
+    <div class="dash-stat-card">
+      <div class="ds-icon" style="background:var(--orange-pale);color:var(--orange);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></div>
+      <b id="statDirections">0</b>
+      <span>Directions</span>
+    </div>
+    <div class="dash-stat-card">
+      <div class="ds-icon" style="background:#EFF6FF;color:#3B82F6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+      <b id="statMessages">0</b>
+      <span>Messages</span>
+    </div>
+    <div class="dash-stat-card">
+      <div class="ds-icon" style="background:#F5F3FF;color:#7C3AED;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg></div>
+      <b id="statTotalLeads">0</b>
+      <span>Total Leads</span>
+    </div>
+  </div>
+
+  <!-- MAIN 2-COL WORKSPACE -->
+  <div class="dashboard-grid">
+    <!-- LEFT: CHART & LISTINGS -->
+    <div>
+      <!-- LEADS TREND CHART -->
+      <div class="dash-box">
+        <div class="dash-box-head">
+          <div>
+            <h2>Customer Traffic &amp; Lead Growth</h2>
+            <p style="font-size:12.5px;color:var(--muted);margin-top:2px;">Comparing views against high-intent customer actions</p>
+          </div>
+          <div class="range-tabs">
+            <button type="button" class="range-tab-btn active" data-range="7d" onclick="loadAnalytics('7d')">7 Days</button>
+            <button type="button" class="range-tab-btn" data-range="30d" onclick="loadAnalytics('30d')">30 Days</button>
+          </div>
+        </div>
+        <div style="height:260px;position:relative;">
+          <canvas id="leadsChartCanvas"></canvas>
+        </div>
+      </div>
+
+      <!-- MY BUSINESS LISTINGS -->
+      <div class="dash-box">
+        <div class="dash-box-head">
+          <div>
+            <h2>My Business Listings</h2>
+            <p style="font-size:12.5px;color:var(--muted);margin-top:2px;">Select a business to switch dashboard analytics view</p>
+          </div>
+        </div>
+        <div id="myListingsContainer">
+          <!-- Dynamic listings -->
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: INBOX & ASSISTANCE -->
+    <div>
+      <!-- CUSTOMER ENQUIRIES INBOX -->
+      <div class="dash-box">
+        <div class="dash-box-head">
+          <h2>Customer Enquiries</h2>
+          <span class="eyebrow" style="font-size:10px;">DIRECT INBOX</span>
+        </div>
+        <div id="inboxMessagesList">
+          <!-- Dynamic messages -->
+        </div>
+      </div>
+
+      <!-- TIPS CARD -->
+      <div class="dash-box" style="background:var(--blue-pale);border-color:rgba(37,99,235,0.2);">
+        <h3 style="font-size:16px;color:var(--blue-dark);margin-bottom:8px;">💡 Boost your verified status</h3>
+        <p style="font-size:13px;color:var(--ink-soft);line-height:1.6;">Businesses with a verified badge and accurate opening hours receive up to <strong>3.4x more phone calls</strong> from local customers.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ADD / EDIT BUSINESS MODAL -->
+<div class="modal-backdrop" id="listingModal">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h3 id="listingModalTitle">Create Business Listing</h3>
+      <button type="button" class="modal-close-btn" onclick="closeListingModal()" aria-label="Close modal">×</button>
+    </div>
+    <form id="listingForm" onsubmit="saveListing(event)">
+      <div class="modal-body">
+        <input type="hidden" id="listingEditId">
+
+        <div class="form-group">
+          <label for="bizNameInput">Business Name *</label>
+          <input type="text" id="bizNameInput" required placeholder="e.g. Spice Route Kitchen">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="bizCategoryInput">Category *</label>
+            <select id="bizCategoryInput" required>
+              <!-- Loaded dynamically -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="bizCityInput">City *</label>
+            <input type="text" id="bizCityInput" required placeholder="e.g. Noida, Delhi">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="bizPhoneInput">Primary Contact Phone *</label>
+            <input type="tel" id="bizPhoneInput" required placeholder="+91 98111 22334">
+          </div>
+          <div class="form-group">
+            <label for="bizWhatsAppInput">WhatsApp Number</label>
+            <input type="tel" id="bizWhatsAppInput" placeholder="+91 98111 22334">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="bizEmailInput">Business Email</label>
+            <input type="email" id="bizEmailInput" placeholder="info@business.com">
+          </div>
+          <div class="form-group">
+            <label for="bizWebsiteInput">Website</label>
+            <input type="url" id="bizWebsiteInput" placeholder="https://yourwebsite.in">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="bizAddressInput">Street Address *</label>
+            <input type="text" id="bizAddressInput" required placeholder="Shop 14, Block B, Main Market">
+          </div>
+          <div class="form-group">
+            <label for="bizAreaInput">Area / Locality</label>
+            <input type="text" id="bizAreaInput" placeholder="Sector 18">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="bizPincodeInput">Pincode</label>
+          <input type="text" id="bizPincodeInput" placeholder="201301">
+        </div>
+
+        <div class="form-group">
+          <label for="bizDescriptionInput">About &amp; Description</label>
+          <textarea id="bizDescriptionInput" rows="3" placeholder="Tell customers what products or services you offer…"></textarea>
+        </div>
+
+        <!-- LEAFLET PIN PICKER -->
+        <div class="form-group">
+          <label>Pin Location on Map (Click or drag pin to set exact coordinates) *</label>
+          <div id="pinPickerMap" style="height:200px;border-radius:12px;border:1px solid var(--line);margin-bottom:8px;"></div>
+          <div class="form-row">
+            <div><label style="font-size:11px;">Latitude</label><input type="number" step="any" id="bizLatInput" required readonly style="background:var(--bg-soft);"></div>
+            <div><label style="font-size:11px;">Longitude</label><input type="number" step="any" id="bizLngInput" required readonly style="background:var(--bg-soft);"></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-ghost" onclick="closeListingModal()">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="saveListingBtn">Save Listing</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- PHOTO UPLOAD MODAL -->
+<div class="modal-backdrop" id="imageUploadModal">
+  <div class="modal-dialog" style="max-width:440px;">
+    <div class="modal-header">
+      <h3>Upload Business Photo</h3>
+      <button type="button" class="modal-close-btn" onclick="closeImageUploadModal()">×</button>
+    </div>
+    <form onsubmit="handlePhotoUpload(event)">
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="photoFileInput">Select Image (.jpg, .png, .webp, max 2MB)</label>
+          <input type="file" id="photoFileInput" accept="image/png, image/jpeg, image/webp" required style="padding:8px;">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-ghost" onclick="closeImageUploadModal()">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="uploadPhotoBtn">Upload Image</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<footer class="footer">
+  <span class="footer-orb"></span>
+  <div class="wrap">
+    <div class="footer-bottom" style="padding-top:0;">
+      <p>© 2026 Locafy Technologies Pvt. Ltd. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<!-- Leaflet Map JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

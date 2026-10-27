@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Portal — Locafy</title>
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<style>
+.admin-head {
+  padding: 40px 0 24px;
+  background: var(--bg-soft);
+  border-bottom: 1px solid var(--line);
+}
+.stats-grid-6 {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  margin: 32px 0 40px;
+}
+@media(max-width: 1024px) {
+  .stats-grid-6 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media(max-width: 600px) {
+  .stats-grid-6 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.admin-card {
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 32px;
+}
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  text-align: left;
+}
+.admin-table th {
+  padding: 12px 14px;
+  border-bottom: 2px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  background: var(--bg-soft);
+}
+.admin-table td {
+  padding: 14px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+.admin-table tr:hover td {
+  background: rgba(255, 107, 43, 0.02);
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="siteNav">
+  <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="Locafy"></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="search.html">Search</a>
+    <a href="dashboard.html">Owner Dashboard</a>
+    <a href="admin.html" class="active">Admin Portal</a>
+  </div>
+  <div class="nav-actions"></div>
+</nav>
+
+<header class="admin-head">
+  <div class="wrap">
+    <div class="eyebrow">PLATFORM ADMINISTRATION</div>
+    <h1 style="font-size:32px;margin-top:6px;">Moderation & Management</h1>
+    <p style="font-size:14px;margin-top:4px;">Review business applications, grant verified badges, and inspect platform activity</p>
+  </div>
+</header>
+
+<main class="wrap" style="padding-top: 10px; padding-bottom: 80px;">
+  <!-- Platform KPI stats -->
+  <div class="stats-grid-6">
+    <div class="stat-card">
+      <span class="stat-label">Total Users</span>
+      <span class="stat-val" id="statTotalUsers">—</span>
+      <span class="stat-sub">Accounts created</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Total Listings</span>
+      <span class="stat-val" id="statTotalBiz">—</span>
+      <span class="stat-sub">Across all cities</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Pending Approval</span>
+      <span class="stat-val" id="statPendingBiz" style="color:var(--orange);">—</span>
+      <span class="stat-sub">Requires action</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Verified</span>
+      <span class="stat-val" id="statVerifiedBiz" style="color:var(--blue);">—</span>
+      <span class="stat-sub">Trusted businesses</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Customer Leads</span>
+      <span class="stat-val" id="statTotalLeads" style="color:var(--green-dark);">—</span>
+      <span class="stat-sub">Calls, chats & msgs</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Total Reviews</span>
+      <span class="stat-val" id="statTotalReviews">—</span>
+      <span class="stat-sub">Customer feedback</span>
+    </div>
+  </div>
+
+  <!-- Business Moderation Table -->
+  <div class="admin-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:20px;">
+      <div>
+        <h2 style="font-size:20px;">Business Moderation</h2>
+        <p style="font-size:13px;color:var(--muted);margin-top:2px;">Approve new submissions or toggle verified trust badges</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <label for="statusFilterSelect" style="font-size:13px;color:var(--muted);font-weight:600;">Status:</label>
+        <select id="statusFilterSelect" class="form-control" style="padding:8px 14px;font-size:13px;min-width:140px;" onchange="loadBusinessesForModeration(this.value)">
+          <option value="all">All Listings</option>
+          <option value="pending" selected>Pending Review</option>
+          <option value="approved">Approved</option>
+          <option value="rejected">Rejected</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Business</th>
+            <th>Category</th>
+            <th>Owner</th>
+            <th>Status</th>
+            <th>Verified</th>
+            <th>Submitted</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="adminBizTableBody">
+          <tr><td colspan="7" style="text-align:center;padding:24px;color:var(--muted);">Loading listings…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Registered Users Table -->
+  <div class="admin-card">
+    <div style="margin-bottom:20px;">
+      <h2 style="font-size:20px;">Registered Users & Accounts</h2>
+      <p style="font-size:13px;color:var(--muted);margin-top:2px;">Customers, business owners, and administrative staff</p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Role</th>
+            <th>Listings</th>
+            <th>Joined</th>
+          </tr>
+        </thead>
+        <tbody id="adminUsersTableBody">
+          <tr><td colspan="6" style="text-align:center;padding:24px;color:var(--muted);">Loading users…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <span class="footer-orb"></span>
+  <div class="wrap">
+    <div class="footer-bottom" style="padding-top:0;">
+      <p>© 2026 Locafy Technologies Pvt. Ltd. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Locafy — Find what's near, right now</title>
+<meta name="description" content="Locafy helps you discover verified local businesses near you — restaurants, salons, repairs, doctors and more — mapped, rated and ready to call.">
+<link rel="icon" href="data:image/png;base64,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">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   LOCAFY — design tokens
+   ============================================================ */
+:root{
+  --blue:#2563EB; --blue-dark:#1E40AF; --blue-pale:#EFF4FF;
+  --green:#10B981; --green-dark:#047857; --green-pale:#ECFDF5;
+  --orange:#F59E0B; --orange-pale:#FFF7E6;
+  --ink:#0F172A; --ink-soft:#334155; --muted:#64748B; --muted-soft:#94A3B8;
+  --line:#E6E9F0; --line-soft:#F0F2F7;
+  --bg:#FFFFFF; --bg-soft:#F8FAFC; --surface:#F3F5F9;
+  --charcoal:#15181C; --charcoal-2:#1D2126;
+  --gradient:linear-gradient(135deg,var(--blue) 0%,var(--green) 100%);
+  --gradient-soft:linear-gradient(135deg,var(--blue-pale) 0%,var(--green-pale) 100%);
+  --font-display:'Fredoka',sans-serif; --font-body:'Plus Jakarta Sans',-apple-system,'Segoe UI',sans-serif; --font-mono:'JetBrains Mono',monospace;
+  --shadow-sm:0 1px 2px rgba(15,23,42,.06); --shadow-md:0 8px 24px -8px rgba(15,23,42,.14);
+  --shadow-lg:0 24px 60px -16px rgba(15,23,42,.22); --shadow-blue:0 14px 32px -12px rgba(37,99,235,.38);
+}
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);-webkit-font-smoothing:antialiased;overflow-x:hidden;opacity:0;animation:pageIn .6s ease forwards;}
+@keyframes pageIn{to{opacity:1;}}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;}
+input,select{font-family:inherit;}
+::selection{background:rgba(37,99,235,.16);color:var(--ink);}
+::-webkit-scrollbar{width:10px;}
+::-webkit-scrollbar-track{background:var(--bg-soft);}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--blue),var(--green));border-radius:10px;border:2px solid var(--bg-soft);}
+
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);}
+.eyebrow::before{content:'';width:18px;height:1.5px;background:var(--gradient);border-radius:2px;}
+.eyebrow.on-dark{color:#8FD6B4;}
+.eyebrow.on-dark::before{background:linear-gradient(135deg,#7CA7FF,#6EE7B7);}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;margin:0;color:var(--ink);letter-spacing:-.01em;}
+p{margin:0;color:var(--muted);line-height:1.65;}
+.wrap{max-width:1240px;margin:0 auto;padding-left:clamp(20px,4vw,48px);padding-right:clamp(20px,4vw,48px);}
+
+/* ---------- scroll progress ---------- */
+.scroll-progress{position:fixed;top:0;left:0;height:3px;width:0%;background:var(--gradient);z-index:999;transition:width .1s linear;}
+
+/* ---------- buttons ---------- */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:14.5px;font-weight:600;padding:13px 24px;border-radius:12px;border:1.5px solid transparent;transition:transform .18s ease,box-shadow .18s ease,background .18s ease,border-color .18s ease,color .18s ease;white-space:nowrap;line-height:1;overflow:hidden;}
+.btn-primary{background:var(--gradient);color:#fff;box-shadow:var(--shadow-blue);}
+.btn-primary::after{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);transition:left .6s ease;}
+.btn-primary:hover::after{left:120%;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 36px -12px rgba(37,99,235,.46);}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line);}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-pale);}
+.btn-block{width:100%;}
+.btn-lg{padding:16px 30px;font-size:15.5px;border-radius:14px;}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px clamp(20px,4vw,48px);background:rgba(255,255,255,.78);backdrop-filter:blur(14px) saturate(1.4);border-bottom:1px solid transparent;transition:padding .25s ease,box-shadow .25s ease,border-color .25s ease;}
+.nav.scrolled{padding:11px clamp(20px,4vw,48px);border-color:var(--line-soft);box-shadow:0 8px 24px -16px rgba(15,23,42,.18);}
+.nav-logo{display:flex;align-items:center;gap:9px;}
+.nav-logo img{height:38px;width:auto;transition:height .25s ease;}
+.nav.scrolled .nav-logo img{height:32px;}
+.nav-links{display:flex;align-items:center;gap:32px;}
+.nav-links a{position:relative;font-size:14px;font-weight:500;color:var(--ink-soft);transition:color .15s;padding:4px 0;}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--gradient);border-radius:2px;transition:width .25s ease;}
+.nav-links a:hover{color:var(--blue);}
+.nav-links a:hover::after{width:100%;}
+.nav-actions{display:flex;align-items:center;gap:10px;}
+
+/* ---------- pin / blob motif ---------- */
+.pin-blob{border-radius:42% 58% 61% 39% / 46% 40% 60% 54%;transition:transform .35s cubic-bezier(.22,1,.36,1),border-radius .35s ease;}
+.signal-ring{position:absolute;border-radius:50%;border:1.5px solid rgba(37,99,235,.35);animation:signalPulse 2.8s cubic-bezier(.2,.7,.3,1) infinite;}
+@keyframes signalPulse{0%{transform:scale(.55);opacity:.9;}80%{opacity:0;}100%{transform:scale(1.9);opacity:0;}}
+.coord-tag{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.06em;color:var(--muted-soft);white-space:nowrap;}
+.dot-live{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(16,185,129,.55);animation:livePulse 1.8s ease-out infinite;flex-shrink:0;}
+@keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(16,185,129,.5);}70%{box-shadow:0 0 0 7px rgba(16,185,129,0);}100%{box-shadow:0 0 0 0 rgba(16,185,129,0);}}
+
+/* ---------- scroll reveal ---------- */
+[data-reveal]{opacity:1;transform:translateY(0);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1);}
+html.has-reveal-ready [data-reveal]:not(.is-visible){opacity:0;transform:translateY(22px);}
+html.has-reveal-ready [data-reveal="scale"]:not(.is-visible){transform:translateY(16px) scale(.94);}
+html.has-reveal-ready [data-reveal="left"]:not(.is-visible){transform:translateX(-24px);}
+html.has-reveal-ready [data-reveal="right"]:not(.is-visible){transform:translateX(24px);}
+[data-reveal].is-visible{opacity:1;transform:translateY(0);}
+[data-reveal="scale"]{transform:translateY(16px) scale(.94);}
+[data-reveal="scale"].is-visible{transform:translateY(0) scale(1);}
+[data-reveal="left"]{transform:translateX(-30px);}
+[data-reveal="left"].is-visible{transform:translateX(0);}
+[data-reveal="right"]{transform:translateX(30px);}
+[data-reveal="right"].is-visible{transform:translateX(0);}
+
+/* ---------- footer ---------- */
+.footer{background:var(--charcoal);color:#B8BFC9;padding:64px 0 28px;position:relative;overflow:hidden;}
+.footer-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:40px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.08);position:relative;z-index:2;}
+.footer-brand img{height:34px;margin-bottom:14px;}
+.footer-brand p{color:#8991A0;font-size:13.5px;max-width:260px;}
+.footer-col h4{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8991A0;font-weight:500;margin-bottom:16px;}
+.footer-col a{display:block;font-size:13.5px;color:#C7CCD6;padding:6px 0;transition:color .15s,transform .15s;}
+.footer-col a:hover{color:#fff;transform:translateX(3px);}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:22px;flex-wrap:wrap;gap:12px;position:relative;z-index:2;}
+.footer-bottom p{color:#6B7280;font-size:12.5px;}
+.footer-social{display:flex;gap:10px;}
+.footer-social a{width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s;}
+.footer-social a:hover{background:var(--gradient);transform:translateY(-3px);}
+.footer-orb{position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.15),transparent 70%);top:-200px;right:-120px;pointer-events:none;}
+
+/* ---------- hero ---------- */
+#hero{position:relative;overflow:hidden;padding:64px 0 40px;}
+.hero-orb{position:absolute;border-radius:50%;pointer-events:none;filter:blur(2px);}
+.hero-orb.o1{width:640px;height:640px;top:-260px;right:-260px;background:radial-gradient(circle at center,rgba(37,99,235,.13),rgba(16,185,129,.08) 55%,transparent 72%);animation:orbDrift1 16s ease-in-out infinite;}
+.hero-orb.o2{width:420px;height:420px;bottom:-220px;left:-180px;background:radial-gradient(circle at center,rgba(16,185,129,.10),transparent 70%);animation:orbDrift2 20s ease-in-out infinite;}
+@keyframes orbDrift1{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-30px,30px) scale(1.06);}}
+@keyframes orbDrift2{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(24px,-24px) scale(1.08);}}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;position:relative;z-index:2;}
+.hero-title{font-size:clamp(38px,4.6vw,60px);line-height:1.04;}
+.hero-title .accent{background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% auto;animation:gradientShift 5s ease infinite;}
+@keyframes gradientShift{0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
+.hero-sub{font-size:17px;max-width:480px;margin-top:18px;color:var(--ink-soft);}
+.search-card{margin-top:32px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-lg);padding:8px;display:flex;align-items:stretch;gap:6px;max-width:560px;transition:box-shadow .3s ease,transform .3s ease;}
+.search-card:hover{box-shadow:0 30px 70px -20px rgba(37,99,235,.3);transform:translateY(-2px);}
+.search-field{flex:1;display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;transition:background .2s;}
+.search-field:hover{background:var(--bg-soft);}
+.search-field svg{flex-shrink:0;color:var(--muted-soft);}
+.search-field input{border:none;outline:none;width:100%;font-size:14.5px;color:var(--ink);background:transparent;}
+.search-field input::placeholder{color:var(--muted-soft);}
+.search-divider{width:1px;background:var(--line);margin:8px 0;}
+.search-go{background:var(--gradient);color:#fff;border:none;border-radius:12px;width:52px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:var(--shadow-blue);transition:transform .25s cubic-bezier(.34,1.56,.64,1);}
+.search-go:hover{transform:scale(1.08) rotate(6deg);}
+.hero-stats{display:flex;gap:30px;margin-top:30px;flex-wrap:wrap;}
+.hero-stat b{font-family:var(--font-display);font-size:22px;font-weight:600;display:block;}
+.hero-stat span{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+
+.hero-visual{position:relative;height:480px;filter:drop-shadow(0 30px 60px -20px rgba(15,23,42,.28));}
+.map-plate{position:absolute;inset:0;border-radius:32px;background:radial-gradient(circle at 30% 20%,rgba(37,99,235,.09),transparent 45%),radial-gradient(circle at 75% 70%,rgba(16,185,129,.11),transparent 50%),var(--bg-soft);border:1px solid var(--line-soft);background-image:linear-gradient(rgba(15,23,42,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(15,23,42,.05) 1px,transparent 1px);background-size:28px 28px;animation:gridDrift 30s linear infinite;overflow:hidden;}
+@keyframes gridDrift{0%{background-position:0 0,0 0;}100%{background-position:56px 0,0 56px;}}
+.map-plate::before{content:'';position:absolute;inset:0;background:conic-gradient(from 0deg at 50% 52%,rgba(37,99,235,.16),transparent 22%,transparent 100%);animation:radarSpin 5s linear infinite;mix-blend-mode:multiply;}
+@keyframes radarSpin{to{transform:rotate(360deg);}}
+.map-roads{position:absolute;inset:0;width:100%;height:100%;opacity:.55;}
+.map-roads path{fill:none;stroke:#CBD5E1;stroke-width:2.5;stroke-linecap:round;}
+.map-roads path.road-b{stroke:#DCE3ED;stroke-width:1.6;stroke-dasharray:1 9;}
+.map-compass{position:absolute;top:18px;right:20px;width:38px;height:38px;border-radius:50%;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-sm);display:flex;align-items:center;justify-content:center;animation:pinBob 6s ease-in-out infinite;}
+.map-compass svg{width:18px;height:18px;color:var(--blue);}
+.sec-pin{position:absolute;width:9px;height:9px;border-radius:50%;background:#fff;border:2.5px solid var(--muted-soft);box-shadow:0 2px 6px rgba(15,23,42,.18);}
+.sec-pin.blue{border-color:var(--blue);}
+.sec-pin.green{border-color:var(--green);}
+.sec-pin.orange{border-color:var(--orange);}
+.center-pin{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);animation:pinBob 3.4s ease-in-out infinite;z-index:3;}
+@keyframes pinBob{0%,100%{transform:translate(-50%,-50%) translateY(0);}50%{transform:translate(-50%,-50%) translateY(-8px);}}
+.center-pin .signal-ring{left:50%;top:50%;width:70px;height:70px;margin:-35px 0 0 -35px;}
+.center-pin .signal-ring.r2{animation-delay:.9s;}
+.center-pin .signal-ring.r3{animation-delay:1.8s;}
+.pin-svg{width:56px;height:56px;position:relative;z-index:2;filter:drop-shadow(0 10px 16px rgba(37,99,235,.35));}
+.float-card{position:absolute;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-md);padding:10px 13px;display:flex;align-items:center;gap:10px;opacity:0;animation:floaty 5s ease-in-out infinite, cardIn .6s ease forwards;transition:box-shadow .25s,transform .25s;}
+.float-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-6px) scale(1.04)!important;z-index:5;}
+@keyframes cardIn{to{opacity:1;}}
+.float-card img{width:34px;height:34px;border-radius:9px;object-fit:cover;flex-shrink:0;}
+.float-card .fc-name{font-size:12.5px;font-weight:700;color:var(--ink);}
+.float-card .fc-meta{font-family:var(--font-mono);font-size:10.5px;color:var(--muted);display:flex;align-items:center;gap:5px;margin-top:1px;}
+.fc1{top:8%;left:2%;animation-delay:.2s,0s;}
+.fc2{top:62%;left:0;animation-delay:1.4s,.15s;}
+.fc3{top:14%;right:0;animation-delay:.8s,.3s;}
+.fc4{top:66%;right:4%;animation-delay:2s,.45s;}
+@keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
+.coord-corner{position:absolute;bottom:16px;left:22px;}
+
+/* ---------- ticker ---------- */
+#ticker{padding:26px 0;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);overflow:hidden;position:relative;background:var(--bg-soft);}
+#ticker::before,#ticker::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none;}
+#ticker::before{left:0;background:linear-gradient(90deg,var(--bg-soft),transparent);}
+#ticker::after{right:0;background:linear-gradient(-90deg,var(--bg-soft),transparent);}
+.ticker-track{display:flex;gap:56px;width:max-content;animation:tickerScroll 32s linear infinite;}
+.ticker-track span{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-soft);white-space:nowrap;display:flex;align-items:center;gap:10px;}
+.ticker-track span::before{content:'●';font-size:6px;color:var(--green);}
+@keyframes tickerScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ---------- categories ---------- */
+#categories{padding:88px 0 20px;}
+.sec-head{max-width:640px;margin-bottom:48px;}
+.sec-head h2{font-size:clamp(28px,3.4vw,40px);margin-top:14px;}
+.cat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;}
+.cat-tile{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding:26px 12px 20px;border-radius:20px;border:1px solid var(--line-soft);transition:border-color .25s,transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s,background .25s;}
+.cat-tile:hover{border-color:transparent;transform:translateY(-6px);box-shadow:var(--shadow-md);background:#fff;}
+.cat-tile:hover .cat-icon{transform:rotate(-8deg) scale(1.1);border-radius:50% 50% 50% 50%/50% 50% 50% 50%;}
+.cat-icon{width:56px;height:56px;display:flex;align-items:center;justify-content:center;color:#fff;}
+.cat-icon svg{width:26px;height:26px;}
+.cat-tile span{font-size:13px;font-weight:600;color:var(--ink-soft);}
+
+/* ---------- spotlight carousel ---------- */
+#spotlight{padding:20px 0 90px;}
+.spot-tabs{display:flex;gap:10px;margin-bottom:36px;flex-wrap:wrap;}
+.spot-tab{padding:10px 22px;border-radius:999px;border:1.5px solid var(--line);background:#fff;font-size:13.5px;font-weight:600;color:var(--ink-soft);transition:border-color .2s,color .2s,background .2s,box-shadow .2s,transform .2s;}
+.spot-tab:hover:not(.active){border-color:var(--blue);color:var(--blue);transform:translateY(-2px);}
+.spot-tab.active{background:var(--gradient);color:#fff;border-color:transparent;box-shadow:var(--shadow-blue);}
+.spot-carousel-wrap{position:relative;}
+.spot-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px 4px 14px;-ms-overflow-style:none;scrollbar-width:none;transition:opacity .22s ease;}
+.spot-track::-webkit-scrollbar{display:none;}
+.spot-track.fade{opacity:0;}
+.spot-card{flex:0 0 258px;scroll-snap-align:start;border:1px solid var(--line-soft);border-radius:20px;overflow:hidden;background:#fff;transition:box-shadow .3s,transform .3s cubic-bezier(.22,1,.36,1);}
+.spot-card:hover{box-shadow:var(--shadow-md);transform:translateY(-6px);}
+.spot-arrow{position:absolute;top:76px;width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-md);display:flex;align-items:center;justify-content:center;z-index:5;transition:transform .2s,box-shadow .2s;color:var(--ink-soft);}
+.spot-arrow:hover{transform:scale(1.08);box-shadow:var(--shadow-lg);color:var(--blue);}
+.spot-arrow.left{left:-20px;}
+.spot-arrow.right{right:-20px;}
+.spot-arrow svg{width:17px;height:17px;}
+@media(max-width:1280px){.spot-arrow.left{left:4px;}.spot-arrow.right{right:4px;}}
+@media(max-width:640px){.spot-arrow{display:none;}}
+
+/* ---------- trending ---------- */
+#trending{padding:88px 0;}
+.trend-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;gap:20px;flex-wrap:wrap;}
+.trend-row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.biz-card{border:1px solid var(--line-soft);border-radius:20px;overflow:hidden;transition:box-shadow .3s,transform .3s cubic-bezier(.22,1,.36,1);background:#fff;}
+.biz-card:hover{box-shadow:var(--shadow-md);transform:translateY(-6px);}
+.biz-img{position:relative;height:140px;overflow:hidden;}
+.biz-badge{position:absolute;top:10px;left:10px;background:rgba(15,23,42,.72);backdrop-filter:blur(4px);color:#fff;font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;padding:5px 9px;border-radius:8px;display:flex;align-items:center;gap:6px;z-index:2;}
+.biz-body{padding:14px 16px 16px;}
+.biz-cat{font-family:var(--font-mono);font-size:10.5px;color:var(--blue);text-transform:uppercase;letter-spacing:.08em;}
+.biz-name{font-size:15.5px;font-weight:700;margin:5px 0 8px;color:var(--ink);}
+.biz-meta{display:flex;align-items:center;justify-content:space-between;font-family:var(--font-mono);font-size:11.5px;color:var(--muted);}
+.rating{display:flex;align-items:center;gap:4px;color:var(--orange);font-weight:600;}
+.rating svg{width:12px;height:12px;}
+.biz-img-inner{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+.biz-card:hover .biz-img-inner{transform:scale(1.08);}
+
+/* ---------- testimonials ---------- */
+#testimonials{padding:20px 0 100px;}
+.t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px;}
+.t-card{border:1px solid var(--line-soft);border-radius:22px;padding:28px 26px;position:relative;transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s,border-color .3s;background:#fff;}
+.t-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md);border-color:transparent;}
+.t-stars{display:flex;gap:3px;color:var(--orange);margin-bottom:16px;}
+.t-stars svg{width:14px;height:14px;}
+.t-quote{font-size:14.5px;color:var(--ink-soft);line-height:1.7;}
+.t-who{display:flex;align-items:center;gap:12px;margin-top:22px;}
+.t-who img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 0 0 1px var(--line);}
+.t-who b{display:block;font-size:13.5px;color:var(--ink);}
+.t-who span{font-family:var(--font-mono);font-size:11px;color:var(--muted-soft);}
+.t-mark{position:absolute;top:22px;right:26px;font-family:var(--font-display);font-size:44px;color:var(--line);line-height:1;}
+
+/* ---------- faq ---------- */
+#faq{padding:100px 0;background:var(--bg-soft);}
+.faq-wrap{max-width:760px;margin:48px auto 0;}
+.faq-item{border-bottom:1px solid var(--line);}
+.faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 4px;background:none;border:none;text-align:left;font-family:var(--font-body);font-size:15.5px;font-weight:700;color:var(--ink);}
+.faq-q .plus{width:26px;height:26px;border-radius:8px;background:var(--surface);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .3s ease,background .3s ease;}
+.faq-q .plus svg{width:13px;height:13px;color:var(--ink-soft);transition:transform .3s ease;}
+.faq-item.open .faq-q .plus{background:var(--gradient);}
+.faq-item.open .faq-q .plus svg{color:#fff;transform:rotate(135deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1);}
+.faq-a p{padding:0 4px 22px;font-size:14px;max-width:640px;}
+
+/* ---------- business band ---------- */
+#for-biz{background:var(--charcoal);color:#fff;padding:100px 0;position:relative;overflow:hidden;margin-top:20px;}
+#for-biz .glow1{position:absolute;top:-160px;left:-100px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.28),transparent 65%);animation:orbDrift1 18s ease-in-out infinite;}
+#for-biz .glow2{position:absolute;bottom:-180px;right:-120px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(16,185,129,.24),transparent 65%);animation:orbDrift2 22s ease-in-out infinite;}
+.biz-grid{display:grid;grid-template-columns:1fr .8fr;gap:60px;align-items:center;position:relative;z-index:2;}
+.biz-title{font-size:clamp(30px,3.6vw,44px);color:#fff;margin-top:16px;line-height:1.1;}
+.biz-title .accent{background:linear-gradient(135deg,#7CA7FF,#6EE7B7);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.biz-copy{color:#A6ADBB;font-size:16px;max-width:480px;margin-top:16px;}
+.biz-cta-row{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap;}
+.perk-list{display:flex;flex-direction:column;gap:18px;margin-top:36px;max-width:440px;}
+.perk{display:flex;gap:14px;align-items:flex-start;}
+.perk-num{font-family:var(--font-mono);font-size:11px;color:#6EE7B7;padding-top:3px;}
+.perk b{color:#fff;font-size:14.5px;display:block;margin-bottom:2px;}
+.perk p{color:#8991A0;font-size:13.5px;}
+.dash-mock{background:var(--charcoal-2);border:1px solid rgba(255,255,255,.09);border-radius:20px;padding:22px;box-shadow:0 30px 70px -20px rgba(0,0,0,.55);transition:transform .4s ease;}
+.dash-mock:hover{transform:translateY(-4px);}
+.dash-mock .dh{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
+.dash-mock .dh span{font-family:var(--font-mono);font-size:10.5px;color:#8991A0;letter-spacing:.08em;text-transform:uppercase;}
+.dash-stat-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+.dash-stat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px;}
+.dash-stat b{font-family:var(--font-display);font-size:22px;color:#fff;display:block;}
+.dash-stat span{font-family:var(--font-mono);font-size:10px;color:#8991A0;}
+.dash-bar-track{height:6px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:6px;}
+.dash-bar-fill{height:100%;background:var(--gradient);border-radius:6px;width:0;transition:width 1.4s cubic-bezier(.16,1,.3,1);}
+
+/* ---------- how it works ---------- */
+#how{padding:100px 0;}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;}
+.how-card{padding:32px 26px;border-radius:22px;background:var(--bg-soft);position:relative;transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s;}
+.how-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md);background:#fff;}
+.how-step{font-family:var(--font-mono);font-size:13px;color:var(--muted-soft);letter-spacing:.06em;}
+.how-card h3{font-size:21px;margin:14px 0 10px;}
+.how-card p{font-size:14px;}
+.how-icon{width:44px;height:44px;border-radius:12px;background:var(--gradient);display:flex;align-items:center;justify-content:center;color:#fff;margin-bottom:18px;transition:transform .3s cubic-bezier(.34,1.56,.64,1);}
+.how-card:hover .how-icon{transform:scale(1.12) rotate(-6deg);}
+.how-icon svg{width:22px;height:22px;}
+
+/* ---------- download ---------- */
+#download{padding:40px 0 110px;}
+.dl-card{background:var(--gradient-soft);border-radius:32px;padding:64px clamp(28px,6vw,72px);display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;overflow:hidden;position:relative;}
+.dl-card::before{content:'';position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.5),transparent 70%);top:-120px;right:-60px;animation:orbDrift2 14s ease-in-out infinite;}
+.dl-title{font-size:clamp(26px,3.2vw,38px);}
+.dl-copy{margin-top:14px;max-width:420px;}
+.store-row{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;}
+.store-btn{display:flex;align-items:center;gap:10px;background:var(--ink);color:#fff;padding:11px 18px;border-radius:12px;font-size:13px;transition:transform .2s,box-shadow .2s;}
+.store-btn:hover{transform:translateY(-3px);box-shadow:0 14px 26px -10px rgba(0,0,0,.4);}
+.store-btn span{display:block;}
+.store-btn small{display:block;font-size:9.5px;color:#9BA3B4;text-transform:uppercase;letter-spacing:.06em;}
+.phone-mock{justify-self:end;width:220px;height:340px;background:#0F172A;border-radius:32px;padding:10px;box-shadow:var(--shadow-lg);position:relative;animation:pinBob 4.5s ease-in-out infinite;}
+.phone-mock .screen{width:100%;height:100%;border-radius:24px;background:linear-gradient(180deg,#fff,#F1F5F9);overflow:hidden;position:relative;}
+.phone-mock .screen .bar{height:44px;background:var(--gradient);border-radius:24px 24px 0 0;}
+.phone-mock .screen .dots{display:flex;gap:6px;padding:14px;}
+.phone-mock .screen .dots span{width:6px;height:6px;border-radius:50%;background:var(--line);}
+.phone-mock .screen .line{height:8px;background:var(--line-soft);border-radius:4px;margin:0 14px 10px;}
+
+@media(max-width:980px){
+  .hero-grid,.biz-grid,.dl-card{grid-template-columns:1fr;}
+  .hero-visual{height:340px;order:-1;}
+  .cat-grid{grid-template-columns:repeat(3,1fr);}
+  .trend-row{grid-template-columns:repeat(2,1fr);}
+  .how-grid{grid-template-columns:1fr;}
+  .phone-mock{display:none;}
+}
+@media(max-width:560px){
+  .cat-grid{grid-template-columns:repeat(2,1fr);}
+  .trend-row{grid-template-columns:1fr;}
+  .search-card{flex-direction:column;}
+  .search-divider{width:auto;height:1px;margin:0 8px;}
+  .nav-links{display:none;}
+}
+</style>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/hero-slider.css">
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<nav class="nav" id="siteNav">
+  <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="Locafy"></a>
+  <div class="nav-links">
+    <a href="#categories">Categories</a>
+    <a href="search.html">Explore &amp; Map</a>
+    <a href="#spotlight">Top Picks</a>
+    <a href="#trending">Near You</a>
+    <a href="#for-biz">For Business</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <div class="nav-actions">
+    <a href="auth-business.html" class="btn btn-ghost">List your business</a>
+    <a href="auth-user.html" class="btn btn-primary">Log in</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hb-slides">
+    <div class="hb-slide active" style="background-image:url('https://images.unsplash.com/photo-1555529771-835f59fc5efe?w=1600&h=1000&fit=crop')"></div>
+    <div class="hb-slide" style="background-image:url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1600&h=1000&fit=crop')"></div>
+    <div class="hb-slide" style="background-image:url('https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=1600&h=1000&fit=crop')"></div>
+    <div class="hb-slide" style="background-image:url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600&h=1000&fit=crop')"></div>
+  </div>
+  <div class="hb-overlay"></div>
+
+  <div class="hb-content wrap">
+    <div class="eyebrow" data-reveal style="color:#BFD4FF;">LOCAL · CONNECT · DISCOVER</div>
+    <h1 class="hb-title" data-reveal>FIND WHAT'S NEAR.<br>RIGHT <span class="accent">NOW.</span></h1>
+    <p class="hb-sub" data-reveal>Verified restaurants, salons, repairs, doctors and more — mapped, rated and ready to call. Across 45 Indian cities.</p>
+    <a href="#categories" class="hb-cta" data-reveal>EXPLORE NEARBY</a>
+  </div>
+
+  <button class="hb-scroll-btn" onclick="document.getElementById('spotlight').scrollIntoView({behavior:'smooth'})" aria-label="Scroll down">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+  </button>
+
+  <div class="hb-dots" id="hbDots">
+    <span class="hb-dot active" onclick="hbGoTo(0)"></span>
+    <span class="hb-dot" onclick="hbGoTo(1)"></span>
+    <span class="hb-dot" onclick="hbGoTo(2)"></span>
+    <span class="hb-dot" onclick="hbGoTo(3)"></span>
+  </div>
+
+  <div class="hb-search-wrap wrap">
+    <div class="search-card hb-search-card" id="heroSearchCard" data-reveal>
+      <div class="search-field" style="position:relative;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" id="heroWhatInput" placeholder="Salons, restaurants, repairs, doctors, gyms…" autocomplete="off">
+        <div id="heroAutocomplete" class="autocomplete-dropdown" style="display:none;"></div>
+      </div>
+      <div class="search-divider"></div>
+      <div class="search-field" style="position:relative;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <input type="text" id="heroLocInput" placeholder="Sector 62, Noida (or Delhi, Mumbai…)">
+        <button type="button" id="heroGeoBtn" class="geo-btn" title="Detect GPS location" aria-label="Use my location">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/></svg>
+        </button>
+      </div>
+      <button type="button" class="search-go" id="heroSearchBtn" onclick="submitHeroSearch()" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      </button>
+    </div>
+
+    <!-- Quick Search Suggestions -->
+    <div class="hero-quick-tags" data-reveal>
+      <span class="quick-tags-label">Popular:</span>
+      <button type="button" class="quick-tag" onclick="quickSearch('Restaurants')">🍽️ Restaurants</button>
+      <button type="button" class="quick-tag" onclick="quickSearch('Biryani')">🍲 Biryani</button>
+      <button type="button" class="quick-tag" onclick="quickSearch('Salons')">✂️ Salons &amp; Spa</button>
+      <button type="button" class="quick-tag" onclick="quickSearch('Dosa')">🥞 South Indian</button>
+      <button type="button" class="quick-tag" onclick="quickSearch('Kebabs')">🍢 Mughlai &amp; Kebabs</button>
+      <button type="button" class="quick-tag" onclick="quickSearch('Repairs')">🔧 AC &amp; Repairs</button>
+      <button type="button" class="quick-tag" onclick="quickSearch('Healthcare')">🏥 Doctors</button>
+      <button type="button" class="quick-tag" onclick="quickSearch('Gyms')">💪 Gyms</button>
+    </div>
+
+    <!-- Explore Indian Cities -->
+    <div class="hero-quick-tags" style="margin-top: 10px;" data-reveal>
+      <span class="quick-tags-label">🌆 Cities:</span>
+      <button type="button" class="quick-tag" onclick="exploreCity('Delhi')">📍 Delhi NCR</button>
+      <button type="button" class="quick-tag" onclick="exploreCity('Mumbai')">📍 Mumbai</button>
+      <button type="button" class="quick-tag" onclick="exploreCity('Bengaluru')">📍 Bengaluru</button>
+      <button type="button" class="quick-tag" onclick="exploreCity('Hyderabad')">📍 Hyderabad</button>
+      <button type="button" class="quick-tag" onclick="exploreCity('Kolkata')">📍 Kolkata</button>
+      <button type="button" class="quick-tag" onclick="exploreCity('Chennai')">📍 Chennai</button>
+      <button type="button" class="quick-tag" onclick="exploreCity('Jaipur')">📍 Jaipur</button>
+      <button type="button" class="quick-tag" onclick="exploreCity('Lucknow')">📍 Lucknow</button>
+      <button type="button" class="quick-tag" onclick="exploreCity('Goa')">📍 Goa</button>
+      <button type="button" class="quick-tag" onclick="exploreCity('Pune')">📍 Pune</button>
+      <button type="button" class="quick-tag" onclick="exploreCity('Ahmedabad')">📍 Ahmedabad</button>
+      <button type="button" class="quick-tag" onclick="exploreCity('Chandigarh')">📍 Chandigarh</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ TICKER ═══ -->
+<section id="ticker">
+  <div class="ticker-track" id="tickerTrack">
+    <span>New Delhi</span><span>Mumbai</span><span>Bengaluru</span><span>Noida</span><span>Pune</span><span>Hyderabad</span><span>Chennai</span><span>Kolkata</span><span>Jaipur</span><span>Ahmedabad</span>
+    <span>New Delhi</span><span>Mumbai</span><span>Bengaluru</span><span>Noida</span><span>Pune</span><span>Hyderabad</span><span>Chennai</span><span>Kolkata</span><span>Jaipur</span><span>Ahmedabad</span>
+  </div>
+</section>
+
+<!-- ═══ CATEGORIES ═══ -->
+<section id="categories">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <div class="eyebrow">BROWSE BY CATEGORY</div>
+      <h2>Everything nearby, one tap away</h2>
+      <p style="color:var(--muted);font-size:15px;margin-top:6px;max-width:560px;">Filter categories by domain or click any tile to view verified businesses near you</p>
+    </div>
+
+    <!-- Category Filter Tabs -->
+    <div class="cat-filter-tabs" id="catFilterTabs" data-reveal>
+      <button type="button" class="cat-tab active" data-group="all" onclick="filterCategoryGrid('all', this)">
+        <span>🌟 All Categories</span>
+      </button>
+      <button type="button" class="cat-tab" data-group="food" onclick="filterCategoryGrid('food', this)">
+        <span>🍽️ Food &amp; Dining</span>
+      </button>
+      <button type="button" class="cat-tab" data-group="beauty" onclick="filterCategoryGrid('beauty', this)">
+        <span>💅 Beauty &amp; Salons</span>
+      </button>
+      <button type="button" class="cat-tab" data-group="services" onclick="filterCategoryGrid('services', this)">
+        <span>🔧 Home &amp; Repairs</span>
+      </button>
+      <button type="button" class="cat-tab" data-group="health" onclick="filterCategoryGrid('health', this)">
+        <span>🏥 Healthcare &amp; Care</span>
+      </button>
+      <button type="button" class="cat-tab" data-group="property" onclick="filterCategoryGrid('property', this)">
+        <span>🏢 Real Estate &amp; More</span>
+      </button>
+    </div>
+
+    <!-- Category Tiles Grid -->
+    <div class="cat-grid" id="categoryGrid">
+      <a href="search.html?category=restaurants" class="cat-tile" data-cat-group="food"><div class="cat-icon pin-blob" style="background:#EF4444"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3v9M4 3c0 2 1.5 3 3 3s3-1 3-3M4 12v9M11 3v18M11 12c3 0 6-2 6-6V3"/></svg></div><span>Restaurants</span></a>
+      <a href="search.html?category=salons" class="cat-tile" data-cat-group="beauty"><div class="cat-icon pin-blob" style="background:#EC4899"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l14 9-14 9V3z"/><circle cx="6" cy="6" r="2"/><circle cx="6" cy="18" r="2"/></svg></div><span>Salons & Spa</span></a>
+      <a href="search.html?category=home-decor" class="cat-tile" data-cat-group="services"><div class="cat-icon pin-blob" style="background:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9M5 10v10h14V10"/></svg></div><span>Home Decor</span></a>
+      <a href="search.html?category=education" class="cat-tile" data-cat-group="property"><div class="cat-icon pin-blob" style="background:#8B5CF6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/></svg></div><span>Education</span></a>
+      <a href="search.html?category=hospitals" class="cat-tile" data-cat-group="health"><div class="cat-icon pin-blob" style="background:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0112 6a5.5 5.5 0 019.5 6c-2.5 4.5-9.5 9-9.5 9z"/><path d="M9 12h6M12 9v6"/></svg></div><span>Hospitals</span></a>
+      <a href="search.html?category=realestate" class="cat-tile" data-cat-group="property"><div class="cat-icon pin-blob" style="background:#0EA5E9"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg></div><span>Real Estate</span></a>
+      <a href="search.html?category=repairs" class="cat-tile" data-cat-group="services"><div class="cat-icon pin-blob" style="background:var(--orange)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 105.7 5.7L14 18.4 5.6 20.4l2-8.4 6.4-6.4z"/></svg></div><span>Repairs</span></a>
+      <a href="search.html?category=pet-care" class="cat-tile" data-cat-group="health"><div class="cat-icon pin-blob" style="background:#F97316"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="16" r="4"/><circle cx="6" cy="8" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="12" cy="6" r="2"/></svg></div><span>Pet Care</span></a>
+      <a href="search.html?category=gyms" class="cat-tile" data-cat-group="beauty"><div class="cat-icon pin-blob" style="background:#DC2626"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5h11v11h-11z"/><path d="M9.5 9.5h5v5h-5zM3 9v6M21 9v6M9 3h6M9 21h6"/></svg></div><span>Gyms</span></a>
+      <a href="search.html?category=events" class="cat-tile" data-cat-group="property"><div class="cat-icon pin-blob" style="background:#7C3AED"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></div><span>Events</span></a>
+      <a href="search.html?category=movers" class="cat-tile" data-cat-group="services"><div class="cat-icon pin-blob" style="background:#059669"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 8h13v8H1zM14 12h4l4 3v1h-8M4 20a2 2 0 100-4 2 2 0 000 4zM17.5 20a2 2 0 100-4 2 2 0 000 4z"/></svg></div><span>Movers</span></a>
+      <a href="search.html?category=healthcare" class="cat-tile" data-cat-group="health"><div class="cat-icon pin-blob" style="background:#10B981"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><span>Healthcare</span></a>
+    </div>
+
+    <!-- Category Featured Live Preview Box -->
+    <div class="cat-preview-box" id="catPreviewBox" data-reveal>
+      <div class="cat-preview-header">
+        <div>
+          <span class="eyebrow" id="catPreviewEyebrow" style="color:var(--blue);">FEATURED PLACES</span>
+          <h3 id="catPreviewTitle" style="font-size:22px;color:var(--ink);margin-top:4px;">Top Rated in All Categories</h3>
+        </div>
+        <a id="catPreviewExploreBtn" href="search.html" class="btn btn-sm btn-primary">Browse All Results →</a>
+      </div>
+      <div class="cat-preview-cards" id="catPreviewCards">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SPOTLIGHT CAROUSEL ═══ -->
+<section id="spotlight">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <div class="eyebrow">CURATED FOR YOU</div>
+      <h2>Top picks by category</h2>
+    </div>
+
+    <div class="spot-tabs" data-reveal>
+      <button class="spot-tab active" data-cat="restaurants" onclick="switchSpot('restaurants',this)">Restaurants</button>
+      <button class="spot-tab" data-cat="salons" onclick="switchSpot('salons',this)">Salons &amp; Spa</button>
+      <button class="spot-tab" data-cat="repairs" onclick="switchSpot('repairs',this)">Repairs</button>
+      <button class="spot-tab" data-cat="healthcare" onclick="switchSpot('healthcare',this)">Healthcare</button>
+      <button class="spot-tab" data-cat="realestate" onclick="switchSpot('realestate',this)">Real Estate</button>
+    </div>
+
+    <div class="spot-carousel-wrap" data-reveal="scale">
+      <button class="spot-arrow left" onclick="scrollSpot(-1)" aria-label="Scroll left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="spot-track" id="spotTrack">
+
+        <!-- RESTAURANTS -->
+        <div class="spot-card" data-cat="restaurants">
+          <div class="biz-img" style="height:150px;"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=280&fit=crop" alt=""><span class="biz-badge"><span class="dot-live"></span>Open now</span></div>
+          <div class="biz-body"><div class="biz-cat">Restaurant</div><div class="biz-name">Spice Route Kitchen</div><div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.8</span><span>0.6 km</span></div></div>
+        </div>
+        <div class="spot-card" data-cat="restaurants">
+          <div class="biz-img" style="height:150px;"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=400&h=280&fit=crop" alt=""><span class="biz-badge"><span class="dot-live"></span>Open now</span></div>
+          <div class="biz-body"><div class="biz-cat">Restaurant</div><div class="biz-name">Punjabi Tadka</div><div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.5</span><span>0.8 km</span></div></div>
+        </div>
+        <div class="spot-card" data-cat="restaurants">
+          <div class="biz-img" style="height:150px;"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1579027989536-b7b1f875659b?w=400&h=280&fit=crop" alt=""><span class="biz-badge"><span class="dot-live"></span>Open now</span></div>
+          <div class="biz-body"><div class="biz-cat">Restaurant</div><div class="biz-name">Sushi Bar Ginza</div><div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.9</span><span>1.4 km</span></div></div>
+        </div>
+        <div class="spot-card" data-cat="restaurants">
+          <div class="biz-img" style="height:150px;"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=280&fit=crop" alt=""><span class="biz-badge"><span class="dot-live"></span>Open now</span></div>
+          <div class="biz-body"><div class="biz-cat">Restaurant</div><div class="biz-name">Cafe Mocha</div><div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.8</span><span>0.4 km</span></div></div>
+        </div>
+        <div class="spot-card" data-cat="restaurants">
+          <div class="biz-img" style="height:150px;"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=280&fit=crop" alt=""><span class="biz-badge" style="background:rgba(220,38,38,.82)">Closed</span></div>
+          <div class="biz-body"><div class="biz-cat">Restaurant</div><div class="biz-name">The Green Bowl</div><div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.6</span><span>1.1 km</span></div></div>
+        </div>
+
+        <!-- SALONS -->
+        <div class="spot-card" data-cat="salons" style="display:none;">
+          <div class="biz-img" style="height:150px;"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=400&h=280&fit=crop" alt=""><span class="biz-badge"><span class="dot-live"></span>Open now</span></div>
+          <div class="biz-body"><div class="biz-cat">Salon &amp; Spa</div><div class="biz-name">Urban Glow Studio</div><div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.6</span><span>0.9 km</span></div></div>
+        </div>
+        <div class="spot-card" data-cat="salons" style="display:none;">
+          <div class="biz-img" style="height:150px;"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?w=400&h=280&fit=crop" alt=""><span class="biz-badge"><span class="dot-live"></span>Open now</span></div>
+          <div class="biz-body"><div class="biz-cat">Salon &amp; Spa</div><div class="biz-name">Bliss Spa &amp; Wellness</div><div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.7</span><span>1.3 km</span></div></div>
+        </div>
+        <div class="spot-card" data-cat="salons" style="display:none;">
+          <div class="biz-img" style="height:150px;"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=400&h=280&fit=crop" alt=""><span class="biz-badge"><span class="dot-live"></span>Open now</span></div>
+          <div class="biz-body"><div class="biz-cat">Salon &amp; Spa</div><div class="biz-name">The Gentlemen's Cut</div><div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.8</span><span>0.5 km</span></div></div>
+        </div>
+        <div class="spot-card" data-cat="salons" style="display:none;">
+          <div class="biz-img" style="height:150px;"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=400&h=280&fit=crop" alt=""><span class="biz-badge" style="background:rgba(220,38,38,.82)">Closed</span></div>
+          <div class="biz-body"><div class="biz-cat">Salon &amp; Spa</div><div class="biz-name">Nail Art Studio</div><div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.4</span><span>1.6 km</span></div></div>
+        </div>
+        <div class="spot-card" data-cat="salons" style="display:none;">
+          <div class="biz-img" style="height:150px;"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&h=280&fit=crop" alt=""><span class="biz-badge"><span class="dot-live"></span>Open now</span></div>
+          <div class="biz-body"><div class="biz-cat">Salon &amp; Spa</div><div class="biz-name">Serenity Salon</div><div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.9</span><span>0.7 km</span></div></div>
+        </div>
+
+        <!-- REPAIRS -->
+        <div class="spot-card" data-cat="repairs" style="display:none;">
+          <div class="biz-img" style="height:150px;"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1516156008625-3a9d6067fab5?w=400&h=280&fit=crop" alt=""><span class="biz-badge" style="background:rgba(220,38,38,.82)">Closed</span></div>
+          <div class="biz-body"><div class="biz-cat">Repairs</div><div class="biz-name">QuickFix AC Service</div><div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.7</span><span>1.2 km</span></div></div>
+        </div>
+        <div class="spot-card" data-cat="repairs" style="display:none;">
+          <div class="biz-img" style="height:150px;"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=400&h=280&fit=crop" alt=""><span class="biz-badge"><span class="dot-live"></span>Open now</span></div>
+          <div class="biz-body"><div class="biz-cat">Repairs</div><div class="biz-name">FixIt Electronics</div><div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.5</span><span>0.9 km</span></div></div>
+        </div>
+        <div class="spot-card" data-cat="repairs" style="display:none;">
+          <div class="biz-img" style="height:150px;"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1607472829760-2f8fdea72cb1?w=400&h=280&fit=crop" alt=""><span class="biz-badge"><span class="dot-live"></span>Open now</span></div>
+          <div class="biz-body"><div class="biz-cat">Repairs</div><div class="biz-name">Prime Plumbing Co</div><div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.6</span><span>1.7 km</span></div></div>
+        </div>
+        <div class="spot-card" data-cat="repairs" style="display:none;">
+          <div class="biz-img" style="height:150px;"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400&h=280&fit=crop" alt=""><span class="biz-badge"><span class="dot-live"></span>Open now</span></div>
+          <div class="biz-body"><div class="biz-cat">Repairs</div><div class="biz-name">AutoCare Garage</div><div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.4</span><span>2.1 km</span></div></div>
+        </div>
+        <div class="spot-card" data-cat="repairs" style="display:none;">
+          <div class="biz-img" style="height:150px;"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&h=280&fit=crop" alt=""><span class="biz-badge"><span class="dot-live"></span>Open now</span></div>
+          <div class="biz-body"><div class="biz-cat">Repairs</div><div class="biz-name">Handy Home Repairs</div><div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.7</span><span>0.6 km</span></div></div>
+        </div>
+
+        <!-- HEALTHCARE -->
+        <div class="spot-card" data-cat="healthcare" style="display:none;">
+          <div class="biz-img" style="height:150px;"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=400&h=280&fit=crop" alt=""><span class="biz-badge"><span class="dot-live"></span>Open now</span></div>
+          <div class="biz-body"><div class="biz-cat">Healthcare</div><div class="biz-name">City Smile Dental</div><div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.9</span><span>1.6 km</span></div></div>
+        </div>
+        <div class="spot-card" data-cat="healthcare" style="display:none;">
+          <div class="biz-img" style="height:150px;"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1666214280391-8ff5bd3c0bf0?w=400&h=280&fit=crop" alt=""><span class="biz-badge"><span class="dot-live"></span>Open now</span></div>
+          <div class="biz-body"><div class="biz-cat">Healthcare</div><div class="biz-name">Wellness Family Clinic</div><div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.7</span><span>0.8 km</span></div></div>
+        </div>
+        <div class="spot-card" data-cat="healthcare" style="display:none;">
+          <div class="biz-img" style="height:150px;"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=400&h=280&fit=crop" alt=""><span class="biz-badge"><span class="dot-live"></span>Open now</span></div>
+          <div class="biz-body"><div class="biz-cat">Healthcare</div><div class="biz-name">VisionCare Eye Center</div><div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.8</span><span>1.1 km</span></div></div>
+        </div>
+        <div class="spot-card" data-cat="healthcare" style="display:none;">
+          <div class="biz-img" style="height:150px;"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=400&h=280&fit=crop" alt=""><span class="biz-badge"><span class="dot-live"></span>Open now</span></div>
+          <div class="biz-body"><div class="biz-cat">Healthcare</div><div class="biz-name">MedPlus Pharmacy</div><div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.6</span><span>0.3 km</span></div></div>
+        </div>
+        <div class="spot-card" data-cat="healthcare" style="display:none;">
+          <div class="biz-img" style="height:150px;"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=280&fit=crop" alt=""><span class="biz-badge" style="background:rgba(220,38,38,.82)">Closed</span></div>
+          <div class="biz-body"><div class="biz-cat">Healthcare</div><div class="biz-name">Physio First</div><div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.5</span><span>1.9 km</span></div></div>
+        </div>
+
+        <!-- REAL ESTATE -->
+        <div class="spot-card" data-cat="realestate" style="display:none;">
+          <div class="biz-img" style="height:150px;"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=280&fit=crop" alt=""><span class="biz-badge"><span class="dot-live"></span>Open now</span></div>
+          <div class="biz-body"><div class="biz-cat">Real Estate</div><div class="biz-name">Urban Nest Realty</div><div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.7</span><span>1.0 km</span></div></div>
+        </div>
+        <div class="spot-card" data-cat="realestate" style="display:none;">
+          <div class="biz-img" style="height:150px;"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400&h=280&fit=crop" alt=""><span class="biz-badge"><span class="dot-live"></span>Open now</span></div>
+          <div class="biz-body"><div class="biz-cat">Real Estate</div><div class="biz-name">Skyline Properties</div><div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.5</span><span>1.8 km</span></div></div>
+        </div>
+        <div class="spot-card" data-cat="realestate" style="display:none;">
+          <div class="biz-img" style="height:150px;"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=400&h=280&fit=crop" alt=""><span class="biz-badge"><span class="dot-live"></span>Open now</span></div>
+          <div class="biz-body"><div class="biz-cat">Real Estate</div><div class="biz-name">HomeFinders India</div><div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.6</span><span>0.7 km</span></div></div>
+        </div>
+        <div class="spot-card" data-cat="realestate" style="display:none;">
+          <div class="biz-img" style="height:150px;"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=400&h=280&fit=crop" alt=""><span class="biz-badge" style="background:rgba(220,38,38,.82)">Closed</span></div>
+          <div class="biz-body"><div class="biz-cat">Real Estate</div><div class="biz-name">Metro Space Realty</div><div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.4</span><span>2.3 km</span></div></div>
+        </div>
+        <div class="spot-card" data-cat="realestate" style="display:none;">
+          <div class="biz-img" style="height:150px;"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=280&fit=crop" alt=""><span class="biz-badge"><span class="dot-live"></span>Open now</span></div>
+          <div class="biz-body"><div class="biz-cat">Real Estate</div><div class="biz-name">GreenAcres Estates</div><div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.8</span><span>1.4 km</span></div></div>
+        </div>
+
+      </div>
+      <button class="spot-arrow right" onclick="scrollSpot(1)" aria-label="Scroll right"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TRENDING ═══ -->
+<section id="trending">
+  <div class="wrap">
+    <div class="trend-top">
+      <div class="sec-head" data-reveal style="margin-bottom:0;">
+        <div class="eyebrow" id="trendEyebrow">28.6139° N, 77.2090° E · NEAR YOU</div>
+        <h2>Trending near you right now</h2>
+      </div>
+      <a href="search.html" class="btn btn-ghost" data-reveal="right">View all nearby →</a>
+    </div>
+    <div class="trend-row">
+      <div class="biz-card" data-reveal>
+        <div class="biz-img"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=280&fit=crop" alt=""><span class="biz-badge"><span class="dot-live"></span>Open now</span></div>
+        <div class="biz-body"><div class="biz-cat">Restaurant</div><div class="biz-name">Spice Route Kitchen</div>
+          <div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.8</span><span>0.6 km</span></div>
+        </div>
+      </div>
+      <div class="biz-card" data-reveal>
+        <div class="biz-img"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=400&h=280&fit=crop" alt=""><span class="biz-badge"><span class="dot-live"></span>Open now</span></div>
+        <div class="biz-body"><div class="biz-cat">Salon & Spa</div><div class="biz-name">Urban Glow Studio</div>
+          <div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.6</span><span>0.9 km</span></div>
+        </div>
+      </div>
+      <div class="biz-card" data-reveal>
+        <div class="biz-img"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1516156008625-3a9d6067fab5?w=400&h=280&fit=crop" alt=""><span class="biz-badge" style="background:rgba(220,38,38,.82)">Closed</span></div>
+        <div class="biz-body"><div class="biz-cat">Repairs</div><div class="biz-name">QuickFix AC Service</div>
+          <div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.7</span><span>1.2 km</span></div>
+        </div>
+      </div>
+      <div class="biz-card" data-reveal>
+        <div class="biz-img"><img class="biz-img-inner" src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=400&h=280&fit=crop" alt=""><span class="biz-badge"><span class="dot-live"></span>Open now</span></div>
+        <div class="biz-body"><div class="biz-cat">Healthcare</div><div class="biz-name">City Smile Dental</div>
+          <div class="biz-meta"><span class="rating"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> 4.9</span><span>1.6 km</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section id="testimonials">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <div class="eyebrow">WHAT PEOPLE ARE SAYING</div>
+      <h2>Loved by neighbours across India</h2>
+    </div>
+    <div class="t-grid">
+      <div class="t-card" data-reveal="scale">
+        <div class="t-mark">"</div>
+        <div class="t-stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+        </div>
+        <p class="t-quote">Found a verified electrician in under two minutes at 11pm — Locafy is now my first stop for anything local.</p>
+        <div class="t-who">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop" alt="">
+          <div><b>Priya Malhotra</b><span>GURGAON</span></div>
+        </div>
+      </div>
+      <div class="t-card" data-reveal="scale">
+        <div class="t-mark">"</div>
+        <div class="t-stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+        </div>
+        <p class="t-quote">Set up our restaurant's listing in ten minutes — calls started coming in the same evening. Best free tool we've used.</p>
+        <div class="t-who">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=crop" alt="">
+          <div><b>Ankit Rawal</b><span>OWNER · SPICE ROUTE KITCHEN</span></div>
+        </div>
+      </div>
+      <div class="t-card" data-reveal="scale">
+        <div class="t-mark">"</div>
+        <div class="t-stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+        </div>
+        <p class="t-quote">The distance and open-now filters actually work. No more calling three "open" salons that turned out to be shut.</p>
+        <div class="t-who">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" alt="">
+          <div><b>Sana Iqbal</b><span>NOIDA</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOR BUSINESS ═══ -->
+<section id="for-biz">
+  <span class="glow1"></span><span class="glow2"></span>
+  <div class="wrap biz-grid">
+    <div data-reveal="left">
+      <div class="eyebrow on-dark">FOR BUSINESS OWNERS</div>
+      <h2 class="biz-title">Get discovered by<br>thousands <span class="accent">nearby.</span></h2>
+      <p class="biz-copy">List your business free, get verified, and start showing up when people search for what you do — right in your neighbourhood.</p>
+
+      <div class="perk-list">
+        <div class="perk"><span class="perk-num">01</span><div><b>Free forever listing</b><p>No setup fees, no hidden charges — your storefront on Locafy, on us.</p></div></div>
+        <div class="perk"><span class="perk-num">02</span><div><b>Verified business badge</b><p>Build trust instantly with a checkmark customers recognise.</p></div></div>
+        <div class="perk"><span class="perk-num">03</span><div><b>Real-time leads dashboard</b><p>See exactly who's calling, clicking and visiting — as it happens.</p></div></div>
+      </div>
+
+      <div class="biz-cta-row">
+        <a href="auth-business.html" class="btn btn-primary btn-lg">List your business — it's free</a>
+        <a href="#how" class="btn btn-ghost btn-lg" style="border-color:rgba(255,255,255,.18);color:#fff;">See how it works</a>
+      </div>
+    </div>
+
+    <div class="dash-mock" data-reveal="right">
+      <div class="dh"><span>THIS WEEK · SPICE ROUTE KITCHEN</span><span class="dot-live" style="display:inline-block;"></span></div>
+      <div class="dash-stat-row">
+        <div class="dash-stat"><b data-counter data-target="1284" data-suffix="">0</b><span>PROFILE VIEWS</span></div>
+        <div class="dash-stat"><b data-counter data-target="96" data-suffix="">0</b><span>CALLS RECEIVED</span></div>
+      </div>
+      <div class="dash-stat" style="margin-bottom:14px;">
+        <span>SEARCH VISIBILITY</span>
+        <div class="dash-bar-track"><div class="dash-bar-fill" data-width="78"></div></div>
+      </div>
+      <div class="dash-stat">
+        <span>RATING TREND</span>
+        <div class="dash-bar-track"><div class="dash-bar-fill" data-width="92"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW IT WORKS ═══ -->
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <div class="eyebrow">HOW LOCAFY WORKS</div>
+      <h2>From search to service, in three taps</h2>
+    </div>
+    <div class="how-grid">
+      <div class="how-card" data-reveal>
+        <div class="how-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+        <div class="how-step">STEP 01</div>
+        <h3>Search</h3>
+        <p>Tell Locafy what you need and where — from a haircut to an emergency plumber.</p>
+      </div>
+      <div class="how-card" data-reveal>
+        <div class="how-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+        <div class="how-step">STEP 02</div>
+        <h3>Compare</h3>
+        <p>Check verified ratings, real distance and price signals, side by side.</p>
+      </div>
+      <div class="how-card" data-reveal>
+        <div class="how-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.4 2.1L8 9.9a16 16 0 006 6l1.4-1.4a2 2 0 012.1-.4c.9.3 1.8.5 2.7.6a2 2 0 011.8 2.1z"/></svg></div>
+        <div class="how-step">STEP 03</div>
+        <h3>Connect</h3>
+        <p>Call, message or get directions — straight through, no middleman.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head" data-reveal style="margin:0 auto;text-align:center;">
+      <div class="eyebrow" style="justify-content:center;">GOOD TO KNOW</div>
+      <h2>Frequently asked questions</h2>
+    </div>
+    <div class="faq-wrap">
+      <div class="faq-item open" data-reveal>
+        <button class="faq-q" onclick="toggleFaq(this)">Is Locafy free to use for customers?<span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+        <div class="faq-a"><p>Completely free. Search, compare and contact as many businesses as you like — Locafy never charges customers to browse or connect.</p></div>
+      </div>
+      <div class="faq-item" data-reveal>
+        <button class="faq-q" onclick="toggleFaq(this)">How does Locafy verify a business?<span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+        <div class="faq-a"><p>We confirm ownership documents, phone number and physical location before granting the verified badge — usually within 24 hours of signup.</p></div>
+      </div>
+      <div class="faq-item" data-reveal>
+        <button class="faq-q" onclick="toggleFaq(this)">Does listing my business really cost nothing?<span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+        <div class="faq-a"><p>Yes — the core listing, verified badge and leads dashboard are free forever. Optional paid boosts are available later if you want extra visibility.</p></div>
+      </div>
+      <div class="faq-item" data-reveal>
+        <button class="faq-q" onclick="toggleFaq(this)">Which cities is Locafy live in?<span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+        <div class="faq-a"><p>We're live across 45 Indian cities and expanding every month — from metros like Delhi and Mumbai to growing tier-2 hubs.</p></div>
+      </div>
+      <div class="faq-item" data-reveal>
+        <button class="faq-q" onclick="toggleFaq(this)">Can I message a business before calling?<span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+        <div class="faq-a"><p>Yes — every listing supports in-app messaging alongside click-to-call, so you can ask questions before you decide to visit or book.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DOWNLOAD ═══ -->
+<section id="download">
+  <div class="wrap">
+    <div class="dl-card" data-reveal="scale">
+      <div>
+        <div class="eyebrow">TAKE IT WITH YOU</div>
+        <h2 class="dl-title">Locafy in your pocket.</h2>
+        <p class="dl-copy">Get instant notifications when a nearby favourite is open, running an offer, or newly verified.</p>
+        <div class="store-row">
+          <a href="#" class="store-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 12.7c0-2.9 2.4-4.3 2.5-4.4-1.4-2-3.5-2.3-4.2-2.3-1.8-.2-3.5 1-4.4 1-.9 0-2.3-1-3.8-1-1.9 0-3.8 1.1-4.7 2.8-2 3.5-.5 8.7 1.5 11.6 1 1.4 2.1 3 3.6 2.9 1.4-.1 2-1 3.7-1s2.2.9 3.7.9c1.6 0 2.5-1.4 3.5-2.9.9-1.3 1.3-2.6 1.3-2.7-.1 0-2.5-1-2.5-3.9zM14.8 4.2c.8-1 1.4-2.3 1.2-3.7-1.2.1-2.6.8-3.5 1.8-.7.9-1.4 2.2-1.2 3.6 1.3.1 2.6-.7 3.5-1.7z"/></svg><span><small>Download on the</small>App Store</span></a>
+          <a href="#" class="store-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.2c-.3.3-.5.7-.5 1.3v17c0 .6.2 1 .5 1.3l.1.1L13.5 12 3.7 2.1l-.1.1zM16.8 15.3l-3.1-3.1V12l3.1-3.1 3.5 2c1 .6 1 1.5 0 2.1l-3.5 2.3zM4.3 21.8l9-9 2.7 2.7-10.6 6.5c-.4.2-.8.1-1.1-.2zM13.3 11.2l-9-9c.3-.3.7-.4 1.1-.2l10.6 6.5-2.7 2.7z"/></svg><span><small>Get it on</small>Google Play</span></a>
+        </div>
+      </div>
+      <div class="phone-mock">
+        <div class="screen">
+          <div class="bar"></div>
+          <div class="dots"><span></span><span></span><span></span></div>
+          <div class="line" style="width:70%"></div>
+          <div class="line" style="width:50%"></div>
+          <div class="line" style="width:60%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <span class="footer-orb"></span>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/logo.png" alt="Locafy">
+        <p>Local. Connect. Discover. Helping India find what's nearby since 2026.</p>
+        <div class="coord-tag" style="margin-top:14px;color:#5B6472;">28.6139° N, 77.2090° E</div>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About Locafy</a><a href="#">Careers</a><a href="#">Press</a><a href="#">Contact us</a>
+      </div>
+      <div class="footer-col">
+        <h4>For you</h4>
+        <a href="#categories">Explore categories</a><a href="#trending">Near you</a><a href="auth-user.html">Log in / Sign up</a>
+      </div>
+      <div class="footer-col">
+        <h4>For business</h4>
+        <a href="auth-business.html">List your business</a><a href="#for-biz">Why Locafy</a><a href="#">Advertise</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Locafy Technologies Pvt. Ltd. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+        <a href="#" aria-label="X"><svg width="15" height="15" viewBox="0 0 24 24" fill="#fff"><path d="M18 2h3l-7.5 8.6L22 22h-6.9l-5.4-6.8L3.5 22H.5l8-9.2L2 2h7l4.9 6.2L18 2z"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg width="15" height="15" viewBox="0 0 24 24" fill="#fff"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2 3.77-2 4.03 0 4.78 2.6 4.78 6V21h-4v-5.7c0-1.36-.02-3.1-1.9-3.1-1.9 0-2.2 1.47-2.2 3v5.8H9z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const bar = document.getElementById('scrollProgress');
+  const nav = document.getElementById('siteNav');
+  window.addEventListener('scroll', ()=>{
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop)/((h.scrollHeight-h.clientHeight)||1)*100;
+    if (bar) bar.style.width = scrolled+'%';
+    if (nav) nav.classList.toggle('scrolled', window.scrollY>10);
+  });
+
+  // Reveal observer
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '60px 0px 60px 0px' });
+
+  window.observeReveals = function(container = document) {
+    const revealEls = container.querySelectorAll('[data-reveal]');
+    revealEls.forEach((el, i) => {
+      if (!el.classList.contains('is-visible')) {
+        el.style.transitionDelay = (i % 6) * 60 + 'ms';
+        io.observe(el);
+      }
+    });
+  };
+
+  // Immediate visibility for initial viewport
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('#hero [data-reveal]').forEach(el => el.classList.add('is-visible'));
+    window.observeReveals();
+    setTimeout(() => {
+      document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('is-visible'));
+    }, 600);
+  });
+
+  function countUp(el){
+    const target = parseFloat(el.dataset.target);
+    const suffix = el.dataset.suffix||'';
+    const isInt = Number.isInteger(target);
+    const dur = 1500, start = performance.now();
+    function tick(now){
+      const p = Math.min((now-start)/dur,1);
+      const eased = 1-Math.pow(1-p,3);
+      const val = target*eased;
+      el.textContent = (isInt? Math.round(val).toLocaleString('en-IN') : val.toFixed(1)) + suffix;
+      if(p<1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  const counters = document.querySelectorAll('[data-counter]');
+  const cio = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ countUp(e.target); cio.unobserve(e.target); } });
+  },{threshold:.4});
+  counters.forEach(c=>cio.observe(c));
+
+  // FAQ accordion
+  function toggleFaq(btn){
+    const item = btn.closest('.faq-item');
+    const ans = item.querySelector('.faq-a');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el=>{
+      el.classList.remove('open');
+      el.querySelector('.faq-a').style.maxHeight = null;
+    });
+    if(!wasOpen){
+      item.classList.add('open');
+      ans.style.maxHeight = ans.scrollHeight + 'px';
+    }
+  }
+  const openItem = document.querySelector('.faq-item.open .faq-a');
+  if(openItem) openItem.style.maxHeight = openItem.scrollHeight + 'px';
+
+  const bars = document.querySelectorAll('.dash-bar-fill');
+  const bio = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.style.width = e.target.dataset.width + '%';
+        bio.unobserve(e.target);
+      }
+    });
+  },{threshold:.3});
+  bars.forEach(b=>bio.observe(b));
+</script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

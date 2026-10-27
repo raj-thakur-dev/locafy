@@ -1,0 +1,36 @@
+{
+  "name": "locafy",
+  "version": "1.0.0",
+  "description": "Locafy - Local business discovery platform for India",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node --watch backend/server.js",
+    "seed": "node backend/db/seed.js",
+    "test": "node tools/test-e2e.js"
+  },
+  "keywords": [
+    "local-business",
+    "discovery",
+    "directory",
+    "express",
+    "sqlite"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "pdfkit": "^0.20.2",
+    "zod": "^3.24.2"
+  },
+  "optionalDependencies": {
+    "better-sqlite3": "^11.8.0"
+  }
+}

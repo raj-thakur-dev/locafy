@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Saved Favourites — Locafy</title>
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<style>
+.favs-page-head {
+  padding: 40px 0 24px;
+  background: var(--bg-soft);
+  border-bottom: 1px solid var(--line);
+}
+.favs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding: 40px 0 80px;
+}
+@media(max-width: 900px) {
+  .favs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media(max-width: 600px) {
+  .favs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="siteNav">
+  <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="Locafy"></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="search.html">Search</a>
+    <a href="favourites.html" class="active">Saved Places</a>
+  </div>
+  <div class="nav-actions"></div>
+</nav>
+
+<header class="favs-page-head">
+  <div class="wrap">
+    <div class="eyebrow">YOUR COLLECTION</div>
+    <h1 style="font-size:32px;margin-top:6px;">Saved Favourites</h1>
+    <p style="font-size:14px;margin-top:4px;">Quick access to your preferred local shops, doctors and services</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="favs-grid" id="favouritesList">
+    <div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-title"></div></div>
+    <div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-title"></div></div>
+    <div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-title"></div></div>
+  </div>
+</main>
+
+<footer class="footer">
+  <span class="footer-orb"></span>
+  <div class="wrap">
+    <div class="footer-bottom" style="padding-top:0;">
+      <p>© 2026 Locafy Technologies Pvt. Ltd. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script>
+async function loadFavourites() {
+  const container = document.getElementById('favouritesList');
+  if (!api.getUser() || !api.getToken()) {
+    container.innerHTML = `
+      <div class="empty-state" style="grid-column: 1 / -1;">
+        <div class="empty-state-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <h3>Sign in to see saved places</h3>
+        <p>Log in with your customer account to save your favorite businesses for quick access.</p>
+        <a href="auth-user.html" class="btn btn-primary">Log in now</a>
+      </div>
+    `;
+    return;
+  }
+
+  try {
+    const data = await api.get('/me/favourites');
+    const favs = data.favourites || [];
+
+    if (favs.length === 0) {
+      container.innerHTML = `
+        <div class="empty-state" style="grid-column: 1 / -1;">
+          <div class="empty-state-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+          <h3>No saved favourites yet</h3>
+          <p>Tap the heart icon on any business card or detail page to save it here.</p>
+          <a href="search.html" class="btn btn-primary">Explore nearby places</a>
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = favs.map(b => `
+      <div class="biz-card">
+        <div class="biz-img">
+          <a href="business.html?id=${b.id}">
+            <img class="biz-img-inner" src="${b.image_url || 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=280&fit=crop'}" alt="${api.escapeHtml(b.name)}">
+          </a>
+          <span class="biz-badge ${b.is_open ? '' : 'closed'}">
+            ${b.is_open ? '<span class="dot-live"></span>Open now' : 'Closed'}
+          </span>
+          <button type="button" class="biz-fav-btn active" onclick="removeFav(${b.id})" title="Remove from favourites">
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+        </div>
+        <div class="biz-body">
+          <div class="biz-cat">${api.escapeHtml(b.category_name)}</div>
+          <a href="business.html?id=${b.id}" class="biz-name">${api.escapeHtml(b.name)}</a>
+          <p style="font-size:12.5px;color:var(--muted);margin-bottom:8px;">${api.escapeHtml(b.address)}, ${api.escapeHtml(b.city)}</p>
+          <div class="biz-meta">
+            <span class="rating">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+              ${b.avg_rating.toFixed(1)} (${b.review_count})
+            </span>
+            <a href="business.html?id=${b.id}" class="btn btn-ghost btn-sm" style="font-size:11.5px;padding:4px 10px;">View →</a>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  } catch (err) {
+    showToast(err.message, 'error');
+  }
+}
+
+async function removeFav(bizId) {
+  try {
+    await api.delete(`/me/favourites/${bizId}`);
+    showToast('Removed from favourites', 'info');
+    loadFavourites();
+  } catch (err) {
+    showToast(err.message, 'error');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadFavourites);
+</script>
+</body>
+</html>

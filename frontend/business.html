@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Details — Locafy</title>
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Leaflet Map CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<link rel="stylesheet" href="css/main.css">
+<style>
+.biz-page-header {
+  background: var(--bg-soft);
+  border-bottom: 1px solid var(--line);
+  padding: 24px 0 32px;
+}
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+.breadcrumb a:hover {
+  color: var(--blue);
+}
+.biz-hero-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.biz-title-wrap h1 {
+  font-size: clamp(28px, 4vw, 42px);
+  margin: 8px 0;
+}
+.biz-meta-strip {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+.biz-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Gallery Grid */
+.gallery-section {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: repeat(2, 180px);
+  gap: 12px;
+  margin: 32px 0;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--surface);
+}
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+.gallery-item.main {
+  grid-row: span 2;
+}
+
+/* Content Grid */
+.biz-details-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr;
+  gap: 40px;
+  padding-bottom: 80px;
+}
+.content-box {
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 28px;
+  margin-bottom: 24px;
+}
+.content-box h2 {
+  font-size: 22px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Hours Table */
+.hours-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.hours-table td {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line-soft);
+  color: var(--ink-soft);
+}
+.hours-table tr.today-row td {
+  color: var(--blue);
+  font-weight: 700;
+}
+.today-tag {
+  background: var(--blue-pale);
+  color: var(--blue);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+}
+
+/* Sidebar Info Card */
+.sidebar-sticky-wrap {
+  position: sticky;
+  top: 90px;
+}
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 20px 0;
+}
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+.contact-item svg {
+  color: var(--blue);
+  flex-shrink: 0;
+}
+
+/* Reviews */
+.reviews-summary-bar {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 24px;
+  align-items: center;
+  padding: 20px;
+  background: var(--bg-soft);
+  border-radius: 16px;
+  margin-bottom: 24px;
+}
+.big-rating {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+  text-align: center;
+}
+.breakdown-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+.breakdown-bar-bg {
+  flex: 1;
+  height: 6px;
+  background: var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.breakdown-bar-fill {
+  height: 100%;
+  background: var(--orange);
+  width: 0%;
+  border-radius: 6px;
+}
+.review-card {
+  border-bottom: 1px solid var(--line-soft);
+  padding: 16px 0;
+}
+.review-card:last-child {
+  border-bottom: none;
+}
+.review-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.review-author {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.review-date {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted-soft);
+}
+.review-comment {
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+/* QR Code Box */
+.qr-card {
+  text-align: center;
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 20px;
+}
+.qr-card h4 {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+.qr-card p {
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+@media(max-width: 900px) {
+  .biz-details-grid {
+    grid-template-columns: 1fr;
+  }
+  .gallery-section {
+    grid-template-columns: 1fr;
+    grid-template-rows: 240px;
+  }
+  .gallery-item:not(.main) {
+    display: none;
+  }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="siteNav">
+  <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="Locafy"></a>
+  <div class="nav-links">
+    <a href="index.html#categories">Explore</a>
+    <a href="index.html#spotlight">Top picks</a>
+    <a href="index.html#trending">Near you</a>
+    <a href="index.html#for-biz">For business</a>
+    <a href="index.html#faq">FAQ</a>
+  </div>
+  <div class="nav-actions">
+    <a href="auth-business.html" class="btn btn-ghost">List your business</a>
+    <a href="auth-user.html" class="btn btn-primary">Log in</a>
+  </div>
+</nav>
+
+<div id="listingContainer">
+  <!-- PAGE HEADER -->
+  <header class="biz-page-header">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <a href="search.html" id="catBreadcrumb">Category</a>
+        <span>/</span>
+        <span id="nameBreadcrumb" style="color:var(--ink);">Business Name</span>
+      </div>
+
+      <div class="biz-hero-title-row">
+        <div class="biz-title-wrap">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span class="biz-cat" id="bizCategoryBadge">Category</span>
+            <span class="badge-verified-pill" id="bizVerifiedBadge" style="display:none;">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+              Verified Partner
+            </span>
+            <span class="biz-badge" id="bizOpenBadge"><span class="dot-live"></span> Checking…</span>
+          </div>
+          <h1 id="bizTitle">Loading business…</h1>
+          <div class="biz-meta-strip">
+            <div class="rating" id="bizRating">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+              <b>0.0</b> (0 reviews)
+            </div>
+            <span style="color:var(--muted);" id="bizAddress">Address loading…</span>
+          </div>
+        </div>
+
+        <div class="biz-header-actions">
+          <button type="button" class="btn btn-primary" onclick="triggerCall()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Call Now
+          </button>
+          <button type="button" class="btn btn-ghost" style="color:var(--green-dark);border-color:var(--green);" onclick="triggerWhatsApp()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/></svg>
+            WhatsApp
+          </button>
+          <button type="button" class="btn btn-ghost" onclick="triggerDirections()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+            Directions
+          </button>
+          <button type="button" class="btn btn-ghost" id="bizFavBtn" onclick="toggleListingFav()" title="Save favourite">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+          <button type="button" class="btn btn-ghost" onclick="shareBusiness()" title="Share listing">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN WRAPPER -->
+  <main class="wrap">
+    <!-- GALLERY -->
+    <div class="gallery-section" id="bizGalleryGrid">
+      <div class="gallery-item main"><div class="skeleton" style="height:100%;"></div></div>
+      <div class="gallery-item"><div class="skeleton" style="height:100%;"></div></div>
+      <div class="gallery-item"><div class="skeleton" style="height:100%;"></div></div>
+    </div>
+
+    <!-- DETAILS 2-COL GRID -->
+    <div class="biz-details-grid">
+      <!-- LEFT CONTENT -->
+      <div>
+        <!-- ABOUT -->
+        <div class="content-box">
+          <h2>About this business</h2>
+          <p id="bizDescription" style="font-size:15px;line-height:1.75;color:var(--ink-soft);"></p>
+        </div>
+
+        <!-- REVIEWS SECTION -->
+        <div class="content-box" id="reviewsSection">
+          <h2>Customer Reviews &amp; Ratings</h2>
+          
+          <div class="reviews-summary-bar">
+            <div>
+              <div class="big-rating" id="summaryAvgRating">4.8</div>
+              <div style="font-size:12px;color:var(--muted);margin-top:4px;">Overall Score</div>
+            </div>
+            <div>
+              <div class="breakdown-row"><span>5★</span><div class="breakdown-bar-bg"><div class="breakdown-bar-fill" id="breakdownBar5"></div></div></div>
+              <div class="breakdown-row"><span>4★</span><div class="breakdown-bar-bg"><div class="breakdown-bar-fill" id="breakdownBar4"></div></div></div>
+              <div class="breakdown-row"><span>3★</span><div class="breakdown-bar-bg"><div class="breakdown-bar-fill" id="breakdownBar3"></div></div></div>
+              <div class="breakdown-row"><span>2★</span><div class="breakdown-bar-bg"><div class="breakdown-bar-fill" id="breakdownBar2"></div></div></div>
+              <div class="breakdown-row"><span>1★</span><div class="breakdown-bar-bg"><div class="breakdown-bar-fill" id="breakdownBar1"></div></div></div>
+            </div>
+          </div>
+
+          <div id="reviewsList">
+            <!-- Dynamic reviews -->
+          </div>
+
+          <!-- ADD REVIEW FORM -->
+          <div style="margin-top:30px;padding-top:24px;border-top:1px solid var(--line-soft);">
+            <h3 style="font-size:17px;margin-bottom:12px;">Add your review</h3>
+            <form id="reviewForm" onsubmit="submitReview(event)">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="reviewRatingSelect">Your rating</label>
+                  <select id="reviewRatingSelect" required>
+                    <option value="5">★★★★★ (5 - Excellent)</option>
+                    <option value="4">★★★★☆ (4 - Good)</option>
+                    <option value="3">★★★☆☆ (3 - Average)</option>
+                    <option value="2">★★☆☆☆ (2 - Poor)</option>
+                    <option value="1">★☆☆☆☆ (1 - Terrible)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="reviewComment">Share your feedback</label>
+                <textarea id="reviewComment" rows="3" placeholder="Tell others about your experience, staff behavior, pricing, etc."></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" id="reviewSubmitBtn">Post Review</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDEBAR -->
+      <div>
+        <div class="sidebar-sticky-wrap">
+          <!-- QUICK ENQUIRY -->
+          <div class="content-box">
+            <h2>Send an Enquiry</h2>
+            <p style="font-size:13px;margin-bottom:16px;">Direct question to the business owner. They'll reach out via phone or email.</p>
+            <form id="enquiryForm" onsubmit="submitEnquiry(event)">
+              <div class="form-group">
+                <label for="enqName">Your name</label>
+                <input type="text" id="enqName" required placeholder="John Doe">
+              </div>
+              <div class="form-group">
+                <label for="enqPhone">Phone number</label>
+                <input type="tel" id="enqPhone" required placeholder="+91 98765 43210">
+              </div>
+              <div class="form-group">
+                <label for="enqEmail">Email (optional)</label>
+                <input type="email" id="enqEmail" placeholder="you@example.com">
+              </div>
+              <div class="form-group">
+                <label for="enqBody">Your question or requirement</label>
+                <textarea id="enqBody" rows="3" required placeholder="Hi, I wanted to ask about pricing and slot availability…"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block" id="enqSubmitBtn">Send Enquiry</button>
+            </form>
+          </div>
+
+          <!-- OPERATING HOURS & LOCATION -->
+          <div class="content-box">
+            <h2>Opening Hours</h2>
+            <table class="hours-table" id="hoursTable">
+              <!-- Dynamic hours -->
+            </table>
+
+            <h2 style="margin-top:24px;">Location &amp; Map</h2>
+            <div style="height:200px;border-radius:12px;overflow:hidden;border:1px solid var(--line);margin:14px 0 10px;" id="listingMap"></div>
+
+            <div class="contact-list">
+              <div class="contact-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <a id="bizPhoneLink" href="#"></a>
+              </div>
+              <div class="contact-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                <a id="bizWebLink" href="#" target="_blank" rel="noopener"></a>
+              </div>
+            </div>
+
+            <!-- QR CODE BOX -->
+            <div class="qr-card">
+              <h4>Open on your phone</h4>
+              <p>Scan with camera to save contacts or get driving directions instantly</p>
+              <div id="qrCodeContainer"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- GALLERY MODAL -->
+<div class="modal-backdrop" id="galleryModal" onclick="closeGalleryModal()">
+  <div class="modal-dialog" style="max-width:800px;background:transparent;box-shadow:none;" onclick="event.stopPropagation()">
+    <img id="modalImage" src="" alt="Full preview" style="width:100%;max-height:80vh;object-fit:contain;border-radius:16px;">
+  </div>
+</div>
+
+<footer class="footer">
+  <span class="footer-orb"></span>
+  <div class="wrap">
+    <div class="footer-bottom" style="padding-top:0;">
+      <p>© 2026 Locafy Technologies Pvt. Ltd. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Twitter"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Leaflet Map JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/listing.js"></script>
+</body>
+</html>

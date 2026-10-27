@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Page Not Found — Locafy</title>
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<style>
+.notfound-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 20px 100px;
+  min-height: 60vh;
+}
+.notfound-code {
+  font-family: var(--font-display);
+  font-size: 110px;
+  line-height: 1;
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+  letter-spacing: -2px;
+}
+.notfound-title {
+  font-size: 28px;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.notfound-desc {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 480px;
+  margin: 0 auto 32px;
+  line-height: 1.6;
+}
+.notfound-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="siteNav">
+  <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="Locafy"></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="search.html">Search</a>
+    <a href="auth-business.html">For Business</a>
+  </div>
+  <div class="nav-actions"></div>
+</nav>
+
+<main class="wrap">
+  <div class="notfound-wrap">
+    <div class="notfound-code">404</div>
+    <h1 class="notfound-title">Oops! Location Not Found</h1>
+    <p class="notfound-desc">
+      The page or business listing you are searching for might have been moved, renamed, or is temporarily unavailable.
+    </p>
+    <div class="notfound-actions">
+      <a href="index.html" class="btn btn-primary">Return to Home</a>
+      <a href="search.html" class="btn btn-ghost">Browse All Businesses</a>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <span class="footer-orb"></span>
+  <div class="wrap">
+    <div class="footer-bottom" style="padding-top:0;">
+      <p>© 2026 Locafy Technologies Pvt. Ltd. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>
